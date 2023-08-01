@@ -35,7 +35,11 @@ struct manacher{
         for(auto v:s){
             t += string("#")+v; //* O(1) *//
         }
-        run_manacher(t+"#");
+        t += string("#");
+        run_manacher(t);
+        debug(t)
+        debug(p)
+
     }
 
     string getLongestSubstring(string s){
@@ -46,10 +50,11 @@ struct manacher{
     }
 
     int getLongest(int cen, bool odd){
-        int pos = 2/cen+1+(!odd);
+        int pos = 2*cen+1+(!odd);
         return p[pos]-1;
     }
 
+    //* 0 indexing *//
     bool checkPalindrome(int l,int r){ //*check whether s.substr(l,r-l+1) is a palindrome or not in O(1) */
         if((r-l+1)<=getLongest((l+r)/2, l%2==r%2)){
             return 1;
@@ -61,14 +66,19 @@ struct manacher{
 }m;
 
 void solve(){
-    string s;cin>>s;
+    string s="abbab";
     m.build(s);
-    cout<<m.getLongestSubstring(s);
-    
+    cout<<m.getLongestSubstring(s)<<endl;
+    int q=10;
+    while(q--){
+        int l,r;cin>>l>>r;
+        cout<<m.checkPalindrome(l,r)<<endl;
+    }
 }
 
 signed main()
 {
+   
     solve();
     return 0;
 }
