@@ -1,5 +1,6 @@
-bool isOperator(char c){
-    return (!isalpha(c) && !isdigit(c));
+bool isOperator(char x) {
+  if (x=='+'||x=='-'||x=='*'||x=='/'||x=='^'||x=='%')return true;
+  return false;
 }
 int getPriority(char C){
     if (C == '-' || C == '+')return 1;
