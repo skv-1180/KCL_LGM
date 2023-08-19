@@ -4,7 +4,7 @@ using namespace std;
 #define debugptr(x, y)cerr << "(Line " << __LINE__ << "):" << #x << " ";_print_(x, y);cerr << endl;
 #define debug(x...)cerr << "(Line " << __LINE__ << "):[" << #x << "]=>";_print_(x);cerr << endl;
 #define graph(x, y)cerr << "(Line " << __LINE__ << "):[" << #x << "]=>" << endl;__print(x, y);cerr << endl;
-template <class T>void _print_(T &x);
+template <class T>void _print_(T x);
 template <class T>void _print_(T *x, int n = 0);
 template <class T1, class T2>void _print_(pair<T1, T2> x);
 template <class T>void _print_(vector<T> &x);
