@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+//--O(N*M)---S(Min(N,M)--//
+template<class T> int lcs(vector<T>&first,vector<T>&second){
+    vector<int>current(second.size()+1,0);    
+    vector<int>next(second.size()+1,0);
+    for(int i=first.size()-1;i>=0;i--){
+        for(int j=second.size()-1;j>=0;j--){
+            int length=0;
+            if(first[i]==second[j])length=1+next[j+1];
+            else length=max(next[j],current[j+1]);
+            current[j]=length;
+        }
+        next=current;
+    }
+    return next[0];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lcs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

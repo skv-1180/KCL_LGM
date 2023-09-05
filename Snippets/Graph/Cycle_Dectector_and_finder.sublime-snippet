@@ -1,0 +1,46 @@
+<snippet>
+	<content><![CDATA[
+int cycle_start,cycle_end;
+bool dfs(int v, int par) { // passing vertex and its parent vertex
+    vis[v] = true;
+    for (int u : adj[v]) {
+        if(u == par) continue; // skipping edge to parent vertex
+        if (vis[u]) {
+            cycle_end = v;
+            cycle_start = u;
+            return true;
+        }
+        parent[u] = v;
+        if (dfs(u, parent[u]))
+            return true;
+    }
+    return false;
+}
+T.C.:O(E) M.C,:O(N)
+vector<int> find_cycle(int n) {
+    vis.assign(n+1, false);
+    parent.assign(n+1, -1);
+    cycle_start = -1;
+
+    for (int v = 1; v <= n; v++) {
+        if (!vis[v] && dfs(v, parent[v]))
+            break;
+    }
+
+    if (cycle_start == -1) {
+        return {};
+    } else {
+        vector<int> cycle;
+        cycle.push_back(cycle_start);
+        for (int v = cycle_end; v != cycle_start; v = parent[v])
+            cycle.push_back(v);
+        cycle.push_back(cycle_start);
+        return cycle;
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cycle</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

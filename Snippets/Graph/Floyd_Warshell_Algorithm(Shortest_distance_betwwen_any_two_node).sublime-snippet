@@ -1,0 +1,34 @@
+<snippet>
+	<content><![CDATA[
+//T.C.:O(N^3) M.C.:O(N+E)
+vector<vector<int>>ShortDistance;
+void FloydWarshall(int n,int edges){
+    ShortDistance.resize(n+1,vector<int>(n+1,INF));
+    adj.resize(n+1);
+    for(int i=1;i<=n;i++){
+        ShortDistance[i][i]=0;
+    }
+    for(int i=0;i<edges;i++){
+        int x,y,wt;
+        cin>>x>>y>>wt;
+        ShortDistance[x][y]=min(ShortDistance[x][y],wt);
+        adj[x].push_back({y,wt});
+        ShortDistance[y][x]=min(ShortDistance[x][y],wt);//for undirected
+        adj[y].push_back({x,wt});//for undirected
+
+    }
+    for(int k=1;k<=n;++k){
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                if (ShortDistance[i][k] < INF && ShortDistance[k][j] < INF)
+                ShortDistance[i][j] = min(ShortDistance[i][j],ShortDistance[i][k]+ShortDistance[k][j]);
+            }
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>floydwarshall</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

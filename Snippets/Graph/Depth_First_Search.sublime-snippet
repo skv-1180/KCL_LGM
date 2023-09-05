@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+int dfs_timer = 0;
+//T.C.:O(N+E),M.C.:O(N)
+void dfs(int v,int rsz=1) {
+    int n=adj.size();
+    if(rsz)time_in.resize(n);time_out.resize(n);
+    time_in[v] = dfs_timer++;
+    vis[v] = 1;
+    for (int u : adj[v]){
+        if(vis[u] == 0){
+            dfs(u,0);
+        }
+    }
+    vis[v] = 2;
+    time_out[v] = dfs_timer++;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

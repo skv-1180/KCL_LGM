@@ -1,0 +1,40 @@
+<snippet>
+	<content><![CDATA[
+//cacl mod inverse of i wrt m
+//T.C.:O(log(i)/log(log(m))) M.C.:O(1)
+int inv(int i,int m) {
+  i%=m;
+  return i <= 1 ? i : m - (long long)(m/i) * inv(m % i,m) % m;
+}
+//Generates inverse mod(m) till m
+//T.C.:O(m) M.C.:O(m)
+vector<int>invs;
+void generate_inv(int m){
+    invs.resize(m);
+    invs[1] = 1;
+    for(int i = 2; i < m; ++i)
+        invs[i] =( m - (long long)(m/i) * invs[m%i] % m)%m;
+}
+//Calculate n!%p
+//T.C.:O(p+logp(n)) M.C.:O(p)
+vector<int> f;//f[i]=i!%p
+int factmod(int n, int prime) {
+    f.resize(prime);
+    f[0] = 1;
+    //precomputation of f
+    for (int i = 1; i < prime; i++)f[i] = f[i-1] * i % prime;
+
+    int res = 1;
+    while (n > 1) {
+        if ((n/prime) % 2)res = prime - res;
+        res = res * f[n%prime] % prime;
+        n /= prime;
+    }
+    return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mod</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

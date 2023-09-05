@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+vii matrixmultiplication(vii &a,vii &b,int mod=LONG_LONG_MAX){
+    int ra=a.size()   ,rb=b.size();
+    int ca=a[0].size(),cb=b[0].size();
+    if(ca!=rb)return{};
+    vii mult(ra,vi(cb));
+    for(int i = 0; i < ra; ++i){
+        for(int j = 0; j < cb; ++j){
+            for(int k = 0; k < ca; ++k){
+                mult[i][j] += a[i][k] * b[k][j];
+                mult[i][j]%=mod;
+            }
+        }
+    }
+    return mult;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>matrixmultiplication</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

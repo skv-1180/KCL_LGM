@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+//T.C.:O(log(y)) M.c.:O(1)
+template<class T>T bin_exp(T x,T y,ll mod=LONG_LONG_MAX){
+    T ans=1;x%=mod;
+    while(y){
+        if(y&1){
+            ans=(ans*1ll*x)%mod;
+            ans%=mod;
+        }
+        x=(x*1ll*x)%mod;
+        y>>=1;
+    }
+    return ans;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>binaryexponiensation</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

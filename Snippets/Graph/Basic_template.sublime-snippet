@@ -1,0 +1,34 @@
+<snippet>
+	<content><![CDATA[
+vector<vector<int>> adj;//int-->pair<int,int>==>{value,weight}
+vector<pair<int,int>>moves{};//for matrix form of graph.
+vector<bool> vis;
+//d[i]-->distance of i from source node
+//par[i]-->parent of i
+vector<int> time_in, time_out;
+vector<int> d, parent;
+void input(int n,int e=-1){
+  adj.resize(n+1);
+  vis.resize(n+1);
+  if(e==-1)e=n-1;//tree
+  for(int i=0;i<e;++i){
+     int v1,v2;
+     cin>>v1>>v2;
+     adj[v1].push_back(v2);
+     adj[v2].push_back(v1);
+  }
+}
+void reset(int n){
+    for(int i=1;i<=n;i++){
+       d[i]=0;parent[i]=0;//bfs
+       vis[i]=0;
+       time_in[i]=0;time_out[i]=0;//dfs
+       adj[i].clear();
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>graph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

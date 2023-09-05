@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+string lcs(string &s1,string &s2){
+    vector<vector<int>>dp(s1.length()+1,vector<int>(s2.length()+1));
+    vector<vector<pair<int,int>>>parent(s1.length()+1,vector<pair<int,int>>(s2.length()+1));
+    for(int i=1;i<=s1.length();i++){
+        for(int j=1;j<=s2.length();j++){
+            if(s1[i-1]==s2[j-1]){
+                dp[i][j]=dp[i-1][j-1]+1;
+                parent[i][j]={-1,-1};
+            }
+            else if(dp[i-1][j]>dp[i][j-1]){
+                dp[i][j]=dp[i-1][j];
+                parent[i][j]={-1,0};
+            }
+            else{
+                dp[i][j]=dp[i][j-1];
+                parent[i][j]={0,-1};
+            }
+        }
+    }
+    pair<int,int>p={s1.length(),s2.length()};
+    string s="";
+    while((p.ff!=0&&p.ss!=0)){
+        if(parent[p.ff][p.ss].ff==-1 && parent[p.ff][p.ss].ss==-1){
+            s.push_back(s1[p.ff-1]);
+        }
+        p={p.ff+parent[p.ff][p.ss].ff,p.ss+parent[p.ff][p.ss].ss};
+    }
+    reverse(begin(s),end(s));
+    debug(dp)
+    return s;
+    
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lcs2</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+	
+</snippet>

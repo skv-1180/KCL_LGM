@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+//T.C:O(N)  M.C:O(4*N);
+vector<pair<int,int>> nearestGreater(vector<int> &v){
+    stack<int>sl,sr;vector<pair<int,int>> ans(v.size());
+    sl.push(0);sr.push(v.size());v[0]=INF;v.push_back(INF);
+    for(int i=1;i<v.size()-1;i++){
+        while (v[sl.top()]<=v[i])sl.pop();
+        while (v[sr.top()]<=v[v.size()-1-i])sr.pop();
+        ans[i].first=sl.top();
+        ans[v.size()-1-i].second=sr.top();
+        sl.push(i);sr.push(v.size()-1-i);
+    }
+    v.pop_back();
+    return ans;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>nearestgreater</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

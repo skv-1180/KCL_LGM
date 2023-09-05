@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+//search nodes level wise
+//T.C.:O(NODE) M.C.:O(1)
+template<class T>void bfs(T source){
+    int n=adj.size();
+    parent.resize(n);d.resize(n)
+    queue<T> q;
+    q.push(source);
+    vis[source] = true;
+    parent[source] = -1;
+    while (!q.empty()) {
+        T v = q.front();
+        q.pop();
+        for (auto child : adj[v]) {
+            if (vis[child]) continue;
+                vis[child] = true;
+                q.push(child);
+                d[child] = d[v] + 1;
+                parent[child] = v;
+        }
+    }
+}
+//shortest path from source to node n
+//T.C.:O(N) M.C.:O(N)
+vector<int> path(int node){
+    if (!vis[node]) return {};
+         else {
+        vector<int> pat;
+        for (int v = node; v != -1; v = parent[v])pat.push_back(v);
+        reverse(begin(pat),end(pat));
+        return pat;
+    }
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

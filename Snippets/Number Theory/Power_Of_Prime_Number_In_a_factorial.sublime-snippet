@@ -1,0 +1,47 @@
+<snippet>
+	<content><![CDATA[
+vector<long long>leastprimedivisor;
+void generate(int n){
+  leastprimedivisor.resize(n+1);
+  for(int i=0;i<=n;i++)leastprimedivisor[i]=i;
+  for (int i = 2; i * i <= n; i++) {
+      if (leastprimedivisor[i]==i){
+          for(int j=i*i;j<=n;j+=i)if(leastprimedivisor[j]==j)leastprimedivisor[j]=i;   
+      }
+  }
+}
+vector<pair<long long,long long>> primeFactorisation(long long num) {
+if(!leastprimedivisor.size())generate(N);
+    vector<pair<long long,long long>> factorization;
+    while(leastprimedivisor[num]!=1){
+        int divisor=leastprimedivisor[num];
+        int power=0;
+        while(num%divisor==0){
+            num/=divisor;power++;
+        }
+        factorization.push_back({divisor,power});
+    }   
+    return factorization;
+}
+
+//gives power of k in n!
+//T.C:O(logk(N)) M.C.:O(1);
+int fact_pow (int n, int k) {
+    vector<pair<int,int>>primfact=primeFactorisation(k);
+    int power=INF;int ct=0;
+    for(auto p:primfact){
+        int res = 0,num=n;
+        while(num) {
+            num /= p.ff;
+            res += num;
+        }
+        power=min(power,(res/p.ss));
+    }
+    return power;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>powerofprimeinfactorial</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

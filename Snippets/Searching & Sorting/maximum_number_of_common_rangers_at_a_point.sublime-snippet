@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+pair<int ,int> maxintersectionofset(vector<pair<int,int>>&range){
+    int number_of_ranges=range.size();
+    map<int,int>mm;
+    for(int i=0;i<number_of_ranges;i++){
+        mm[range[i].ff]++;
+        mm[range[i].ss+1]--;
+    }
+    int max_number_of_intersection=0;
+    int min_index_of_maxintersection=0;
+    int intersection=0;
+    for(auto &val:mm){
+        intersection=intersection+val.second;
+        if(intersection>max_number_of_intersection){
+            max_number_of_intersection=intersection;
+            min_index_of_maxintersection=val.first;
+        }
+    }
+    return {max_number_of_intersection,min_index_of_maxintersection};
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>maxintersectionofranges</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

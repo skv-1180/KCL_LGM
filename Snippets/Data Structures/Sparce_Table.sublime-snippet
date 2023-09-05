@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+//evaluates f(v[l],v[l+1],...,v[r]) as query(l,r)
+//T.C.:O(Nlog(N)) M.C.(Nlog(N))
+vector<vector<int>>sp(log2(L)+1,vector<int>(L));
+void generate_sp(vector<int>&v,function<int(int,int)>f){
+    for(int i=0;i<v.size();i++)sp[0][i]=v[i];
+    for(int j=1;j<=log2(v.size());j++){
+        for(int i=0;i+(1<<j)-1<v.size();i++){
+            sp[j][i]=f(sp[j-1][i],sp[j-1][i+(1<<(j-1))]);
+        }
+    }
+}
+//excessing all the evaluated expresions
+//T.C.:O(1)  M.C.:O(1) (NOTE:r>=l)
+int query(int l,int r,function<int(int,int)>f){
+    if(l>r)swap(l,r);
+    int length=r-l+1,k=0;
+    while((1<<(k+1))<=length)k++;
+    return f(sp[k][l],sp[k][r-(1<<k)+1]);
+}
+int f(int a,int b){
+    return max(a,b);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sparce</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,41 @@
+<snippet>
+	<content><![CDATA[
+//no. of integers in [1,n] coprime to n.
+//TC:O(rqrt(n))  MC:O(1)
+/*Properties:
+1.phi(p)  =p-1  p==>prime
+2.phi(p^k)=p^k-p^(k-1)  p==>prime
+3.phi(ab)=phi(a)phi(b)  ==a,b are coprime==
+4.sigma(phi(d))=n      d==>divisor on n in [1,n]
+5.(a^phi(n))%n=1        <Euler Theorem>(a,m are coprime)
+6.(a^n)%m=(a^(n%phi(m)))%m  ==>a,m coprime
+7.(a^n)%m=(a^(phi(m)+(n%phi(m))))%m  ==>a,m general
+*/
+int phi(int n) {
+    int result = n;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            while (n % i == 0)n /= i;
+            result -= result / i;
+        }
+    }
+    if (n > 1)result -= result / n;
+    return result;
+}
+//generate all phi from 1 to n;
+//TC:O(nlog(log(n)))  MC:O(n)
+vector<int> phis;
+void phi_1_to_n(int n) {
+    for (int i = 0; i <= n; i++)phis.push_back(i);
+    for (int i = 2; i <= n; i++) {
+        if (phis[i] == i) {
+            for (int j = i; j <= n; j += i)phis[j] -= phis[j] / i;
+        }
+    }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>eulertotient</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
