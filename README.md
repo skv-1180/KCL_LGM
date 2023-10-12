@@ -43,20 +43,24 @@ signed main(){
     int t=1,TestCase=0;cin>>t;
     while(t--){
         TestCase++;debug(TestCase)
-            int n,m,k;cin>>n>>m>>k;
-            if(k>3){
-                cout<<0<<endl;continue;
+            int n;cin>>n;
+            vector<string>v(n);input(v)
+            int ct=0;
+            for(int i=0;i<(n>>1);i++){
+                for(int j=0;j<(n>>1);j++){
+                    
+                
+                int a=v[i][j];
+                int b=v[j][n-i-1];
+                int c=v[n-j-1][i];
+                int d=v[n-i-1][n-j-1];
+                int mx=max(max(a,b),max(c,d));
+                ct+=(mx<<2)-(a+b+c+d);
+                debug(ct,i)
+                }
             }
-            if(k==1){
-                cout<<1<<endl;
-            }
-            else if(k==2){
-                cout<<min(m,k-1+((m-k)/k))<<endl;
-            }
-            else{
-                cout<<max(m-k-((m-k)/k),0ll)<<endl;
+            cout<<ct<<endl;
 
-            }
         cl()
     }
 return 0;
