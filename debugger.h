@@ -13,11 +13,13 @@ template <class T1, class T2>void _print_(map<T1, T2> &x);
 template <class T>void _print_(queue<T> x);
 template <class T>void _print_(deque<T> x);
 template <class T>void _print_(set<T> &x);
+template <class T>void _print_(oset<T> &x);
 template <class T>void _print_(multiset<T> &x);
 template <class T>void _print_(unordered_set<T> &x);
 template <class T>void _print_(priority_queue<T>x);
 template <class T>void _print_(priority_queue<T,vector<T>,greater<T>>x);
 template <class T>void _print_(stack<T> x);
+
 void _print_(long long x){
     if(sizeof(x)==sizeof(long long)){
         if(abs(x)>=INF){
@@ -114,6 +116,16 @@ template <class T>void _print_(set<T> &x){
     }
     cerr << "}";
 }
+template <class T>void _print_(oset<T>&x){
+    cerr << "{ ";
+    int j = 0;
+    for (auto i : x){
+        cerr << j++ << ":";
+        _print_(i);
+        cerr << " " ;
+    }
+    cerr << "}";
+}
 template <class T>void _print_(multiset<T> &x){
     cerr << "{";
     int j = 0;
@@ -173,7 +185,7 @@ template <class T>void _print_(stack<T> x){
         cerr<<'}';
     }
 }
-template <class T1, class... T2>void _print_(T1 &x, T2... y){
+template <class T1, class... T2>void _print_(T1 x, T2... y){
     _print_(x);
     if (sizeof...(y))cerr << ",";
     _print_(y...);
