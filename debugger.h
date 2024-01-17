@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+struct Node;
 #define cl() cerr << endl;
 #define debugptr(x, y)cerr << "(Line " << __LINE__ << "):" << #x << " ";_print_(x, y);cerr << endl;
 #define debug(x...)cerr << "(Line " << __LINE__ << "):[" << #x << "]=>";_print_(x);cerr << endl;
@@ -7,6 +8,7 @@ using namespace std;
 template <class T>void _print_(T x);
 template <class T>void _print_(T *x, int n = 0);
 template <class T1, class T2>void _print_(pair<T1, T2> x);
+template <class T>void _print_(Node &x);
 template <class T>void _print_(vector<T> &x);
 template <class T>void _print_(vector<vector<T>> &x);
 template <class T1, class T2>void _print_(map<T1, T2> &x);
@@ -14,6 +16,7 @@ template <class T>void _print_(queue<T> x);
 template <class T>void _print_(deque<T> x);
 template <class T>void _print_(set<T> &x);
 template <class T>void _print_(oset<T> &x);
+template <class T>void _print_(omset<T>&x);
 template <class T>void _print_(multiset<T> &x);
 template <class T>void _print_(unordered_set<T> &x);
 template <class T>void _print_(priority_queue<T>x);
@@ -48,6 +51,9 @@ template <class T1, class T2>void _print_(pair<T1, T2> x){
     _print_(x.second);
     cerr << "}";
 }
+template <class T>void _print_(Node &x){
+    x.deb();
+}
 template <class T>void _print_(vector<T> &x){
     cerr << "{ ";
     int j = 0;
@@ -58,6 +64,7 @@ template <class T>void _print_(vector<T> &x){
     }
     cerr << "}";
 }
+
 template<class T>void _print_(vector<vector<T>>&v){
     cerr<<'{'<<endl;int j=0;
     for(vector<T> &arr:v){
@@ -126,6 +133,17 @@ template <class T>void _print_(oset<T>&x){
     }
     cerr << "}";
 }
+template <class T>void _print_(omset<T>&x){
+    cerr << "{ ";
+    int j = 0;
+    for (auto i : x){
+        cerr << j++ << ":";
+        _print_(i);
+        cerr << " " ;
+    }
+    cerr << "}";
+}
+
 template <class T>void _print_(multiset<T> &x){
     cerr << "{";
     int j = 0;
